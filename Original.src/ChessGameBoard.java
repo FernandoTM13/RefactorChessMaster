@@ -148,13 +148,9 @@ public class ChessGameBoard extends JPanel{
             }
         }
         repaint();
-        //revalidate();
-        // only the combination of these two calls work...*shrug*
+     
     }
-    /**
-     * (Re)initializes this ChessGameBoard to its default layout with all 32
-     * pieces added.
-     */
+   
     public void initializeBoard(){
         resetBoard( false );
         for ( int i = 0; i < chessCells.length; i++ ){
