@@ -2,16 +2,7 @@ package chessboard_entities;
 import javax.swing.ImageIcon;
 
 import java.util.ArrayList;
-// import java.awt.Color;
-// -------------------------------------------------------------------------
-/**
- * Represents a Queen game piece.
- *
- * @author Ben Katz (bakatz)
- * @author Myles David II (davidmm2)
- * @author Danielle Bushrow (dbushrow)
- * @version 2010.11.17
- */
+
 public class Queen
     extends ChessGamePiece{
     // ----------------------------------------------------------

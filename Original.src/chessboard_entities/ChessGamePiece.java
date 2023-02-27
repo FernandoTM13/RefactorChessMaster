@@ -58,7 +58,7 @@ public abstract class ChessGamePiece{
      * @param pieceColor
      *            either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
-    public ChessGamePiece(
+    protected ChessGamePiece(
         ChessGameBoard board,
         int row,
         int col,
@@ -90,7 +90,7 @@ public abstract class ChessGamePiece{
      * @param pieceColor
      *            either GamePiece.BLACK, WHITE, or UNASSIGNED
      */
-    public ChessGamePiece(
+    protected ChessGamePiece(
         ChessGameBoard board,
         int row,
         int col,
@@ -214,23 +214,11 @@ public abstract class ChessGamePiece{
                     if ( isEnemy( board, pieceRow, i ) ){
                         break;
                     }
-                } else {
-                    continue;
-                }
+                } 
             }
             return moves;
         }
-    // ----------------------------------------------------------
-    /**
-     * Calculates and returns moves in the west direction relative to this
-     * piece.
-     *
-     * @param board
-     *            the board to calculate the moves on
-     * @param numMoves
-     *            the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
+ 
     protected ArrayList<String> calculateWestMoves(
     	    ChessGameBoard board,
     	    int numMoves) {
