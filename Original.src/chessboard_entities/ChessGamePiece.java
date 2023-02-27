@@ -169,12 +169,9 @@ public abstract class ChessGamePiece{
                 moves.add(i + "," + pieceColumn);
                 count++;
 
-                if (isEnemy(board, i, pieceColumn)) {
+                if (isEnemy(board, i, pieceColumn) || board.getCell(i, pieceColumn).getPieceOnSquare() != null) {
                     break;
                 }
-            } else {
-                // A friendly piece is blocking the way, so we cannot move further north
-                break;
             }
         }
 
@@ -268,9 +265,8 @@ public abstract class ChessGamePiece{
             } else if (isEnemy(board, newRow, newCol)) {
                 moves.add(newRow + "," + newCol);
                 count++;
-                break;
-            } else {
-                break;
+                // Stop searching for moves if an enemy piece is encountered
+                i = 8;
             }
         }
 
@@ -299,11 +295,10 @@ public abstract class ChessGamePiece{
                 if (board.getCell(pieceRow - i, pieceColumn + i).getPieceOnSquare() == null) {
                     moves.add((pieceRow - i) + "," + (pieceColumn + i));
                     count++;
-                } else if (isEnemy(board, pieceRow - i, pieceColumn + i)) {
-                    moves.add((pieceRow - i) + "," + (pieceColumn + i));
-                    count++;
-                    break;
                 } else {
+                    if (isEnemy(board, pieceRow - i, pieceColumn + i)) {
+                        moves.add((pieceRow - i) + "," + (pieceColumn + i));
+                    }
                     break;
                 }
             }
