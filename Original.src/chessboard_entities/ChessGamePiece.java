@@ -320,25 +320,28 @@ public abstract class ChessGamePiece{
     protected ArrayList<String> calculateSouthWestMoves(
             ChessGameBoard board,
             int numMoves ){
-            ArrayList<String> moves = new ArrayList<>();
-            int count = 0;
-            if (isPieceOnScreen()){
-                for (int i = 1; i < 8 && count < numMoves; i++){
-                    if (isOnScreen(pieceRow + i, pieceColumn - i) &&
-                        (board.getCell(pieceRow + i, pieceColumn - i).getPieceOnSquare() == null)){
-                        moves.add((pieceRow + i) + "," + (pieceColumn - i));
-                        count++;
-                    } else if (isEnemy(board, pieceRow + i, pieceColumn - i)){
-                        moves.add((pieceRow + i) + "," + (pieceColumn - i));
-                        count++;
-                        break;
-                    } else {
-                        break;
-                    }
-                }
-            }
+        ArrayList<String> moves = new ArrayList<>();
+        int count = 0;
+        if (!isPieceOnScreen()){
             return moves;
         }
+        for (int i = 1; i < 8 && count < numMoves; i++){
+            if (isOnScreen(pieceRow + i, pieceColumn - i)) {
+                if (board.getCell(pieceRow + i, pieceColumn - i).getPieceOnSquare() == null) {
+                    moves.add((pieceRow + i) + "," + (pieceColumn - i));
+                    count++;
+                } else if (isEnemy(board, pieceRow + i, pieceColumn - i)){
+                    moves.add((pieceRow + i) + "," + (pieceColumn - i));
+                    count++;
+                    i = 8; // Jump out of loop after finding an enemy piece
+                }
+                else {
+                    break; // Friendly piece blocking the way
+                }
+            }
+        }
+        return moves;
+    }
     // ----------------------------------------------------------
     /**
      * Calculates and returns moves in the south-east direction relative to this
@@ -368,12 +371,10 @@ public abstract class ChessGamePiece{
                 } else if (isEnemy(board, row, col)) {
                     moves.add(row + "," + col);
                     count++;
-                    break;
-                } else {
-                    break;
+                    count = numMoves; // terminate the loop
                 }
             } else {
-                break;
+                count = numMoves; // terminate the loop
             }
         }
 
