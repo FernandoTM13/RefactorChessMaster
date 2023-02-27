@@ -90,7 +90,7 @@ public class ChessGameEngine{
             pieces = (ArrayList<ChessGamePiece>) board.getAllWhitePieces();
         }
         else if ( playerNum == 2 ){
-            pieces = board.getAllBlackPieces();
+            pieces = (ArrayList<ChessGamePiece>) board.getAllBlackPieces();
         }
         else
         {

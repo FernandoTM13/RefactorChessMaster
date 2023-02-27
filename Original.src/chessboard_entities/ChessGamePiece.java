@@ -673,23 +673,11 @@ public abstract class ChessGamePiece{
             return false;
         }
         if ( this.getColorOfPiece() == ChessGamePiece.WHITE ){
-            if ( enemyPiece.getColorOfPiece() == ChessGamePiece.BLACK ){
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return enemyPiece.getColorOfPiece() == ChessGamePiece.BLACK;
         }
         else
         {
-            if ( enemyPiece.getColorOfPiece() == ChessGamePiece.WHITE ){
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return enemyPiece.getColorOfPiece() == ChessGamePiece.WHITE;
         }
     }
     // ----------------------------------------------------------
