@@ -370,7 +370,6 @@ public abstract class ChessGamePiece{
                     count++;
                 } else if (isEnemy(board, row, col)) {
                     moves.add(row + "," + col);
-                    count++;
                     count = numMoves; // terminate the loop
                 }
             } else {

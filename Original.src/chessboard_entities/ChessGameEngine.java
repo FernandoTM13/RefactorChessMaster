@@ -163,14 +163,10 @@ public class ChessGameEngine{
         else
         {
             board.resetBoard( false );
-            // System.exit(0);
         }
     }
-    /**
-     * Determines if the game should continue (i.e. game is in check or is
-     * 'normal'). If it should not, the user is asked to play again (see above
-     * method).
-     */
+
+    
     private void checkGameConditions(){
         int origPlayer = currentPlayer;
         for ( int i = 0; i < 2; i++ ){
