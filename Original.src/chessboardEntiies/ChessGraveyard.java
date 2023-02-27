@@ -1,3 +1,4 @@
+package chessboardEntiies;
 import java.awt.GridLayout;
 import javax.swing.*;
 // -------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+package chessboardEntiies;
 import java.awt.*;
 import javax.swing.*;
 // -------------------------------------------------------------------------

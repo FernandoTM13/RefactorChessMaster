@@ -1,3 +1,4 @@
+package chessboardEntiies;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 // -------------------------------------------------------------------------

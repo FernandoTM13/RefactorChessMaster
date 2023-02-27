@@ -1,4 +1,6 @@
+package chessboardEntiies;
 import javax.swing.ImageIcon;
+
 import java.util.ArrayList;
 // -------------------------------------------------------------------------
 /**

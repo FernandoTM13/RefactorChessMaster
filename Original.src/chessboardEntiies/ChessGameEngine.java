@@ -1,6 +1,8 @@
+package chessboardEntiies;
 import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+
 import java.awt.event.MouseEvent;
 // -------------------------------------------------------------------------
 /**
@@ -85,7 +87,7 @@ public class ChessGameEngine{
     public boolean playerHasLegalMoves( int playerNum ){
         ArrayList<ChessGamePiece> pieces;
         if ( playerNum == 1 ){
-            pieces = board.getAllWhitePieces();
+            pieces = (ArrayList<ChessGamePiece>) board.getAllWhitePieces();
         }
         else if ( playerNum == 2 ){
             pieces = board.getAllBlackPieces();
