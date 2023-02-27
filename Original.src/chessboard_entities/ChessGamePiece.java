@@ -132,23 +132,18 @@ public abstract class ChessGamePiece{
      * @return ArrayList<String> the calculated moves.
      */
     protected ArrayList<String> calculateSouthMoves(
-        ChessGameBoard board,
-        int numMoves ){
+            ChessGameBoard board,
+            int numMoves ){
         ArrayList<String> moves = new ArrayList<>();
         int count = 0;
         if ( isPieceOnScreen() ){
-            for ( int i = pieceRow + 1; i < 8 && count < numMoves; i++ ){
-                if ( ( board.getCell( i, pieceColumn ).getPieceOnSquare()
-                    == null || isEnemy( board, i, pieceColumn ) ) ){
+            for ( int i = pieceRow + 1; i < 8 && count < numMoves 
+                    && (board.getCell(i, pieceColumn).getPieceOnSquare() == null 
+                    || !isEnemy(board, i, pieceColumn)); i++ ){
+                if ( board.getCell( i, pieceColumn ).getPieceOnSquare() == null 
+                        || isEnemy( board, i, pieceColumn ) ) {
                     moves.add( i + "," + pieceColumn );
                     count++;
-                    if ( isEnemy( board, i, pieceColumn ) ){
-                        break;
-                    }
-                }
-                else
-                {
-                    break;
                 }
             }
         }
@@ -165,27 +160,31 @@ public abstract class ChessGamePiece{
      *            the number of moves to calculate
      * @return ArrayList<String> the moves in this direction
      */
-    protected ArrayList<String> calculateNorthMoves(
-        ChessGameBoard board,
-        int numMoves ){
+    protected ArrayList<String> calculateNorthMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<>();
         int count = 0;
-        if ( isPieceOnScreen() ){
-            for ( int i = pieceRow - 1; i >= 0 && count < numMoves; i-- ){
-                if ( ( board.getCell( i, pieceColumn ).getPieceOnSquare()
-                    == null || isEnemy( board, i, pieceColumn ) ) ){
-                    moves.add( i + "," + pieceColumn );
-                    count++;
-                    if ( isEnemy( board, i, pieceColumn ) ){
-                        break;
-                    }
-                }
-                else
-                {
+        if (!isPieceOnScreen()) {
+            return moves;
+        }
+
+        for (int i = pieceRow - 1; i >= 0; i--) {
+            if (count >= numMoves) {
+                break;
+            }
+
+            if (board.getCell(i, pieceColumn).getPieceOnSquare() == null || isEnemy(board, i, pieceColumn)) {
+                moves.add(i + "," + pieceColumn);
+                count++;
+
+                if (isEnemy(board, i, pieceColumn)) {
                     break;
                 }
+            } else {
+                // A friendly piece is blocking the way, so we cannot move further north
+                break;
             }
         }
+
         return moves;
     }
     // ----------------------------------------------------------
@@ -200,11 +199,13 @@ public abstract class ChessGamePiece{
      * @return ArrayList<String> the moves in this direction
      */
     protected ArrayList<String> calculateEastMoves(
-        ChessGameBoard board,
-        int numMoves ){
-        ArrayList<String> moves = new ArrayList<>();
-        int count = 0;
-        if ( isPieceOnScreen() ){
+            ChessGameBoard board,
+            int numMoves ){
+            ArrayList<String> moves = new ArrayList<>();
+            int count = 0;
+            if ( !isPieceOnScreen() ) {
+                return moves;
+            }
             for ( int i = pieceColumn + 1; i < 8 && count < numMoves; i++ ){
                 if ( ( board.getCell( pieceRow, i ).getPieceOnSquare()
                     == null || isEnemy( board, pieceRow, i ) ) ){
@@ -213,15 +214,12 @@ public abstract class ChessGamePiece{
                     if ( isEnemy( board, pieceRow, i ) ){
                         break;
                     }
-                }
-                else
-                {
-                    break;
+                } else {
+                    continue;
                 }
             }
+            return moves;
         }
-        return moves;
-    }
     // ----------------------------------------------------------
     /**
      * Calculates and returns moves in the west direction relative to this
@@ -234,28 +232,28 @@ public abstract class ChessGamePiece{
      * @return ArrayList<String> the moves in this direction
      */
     protected ArrayList<String> calculateWestMoves(
-        ChessGameBoard board,
-        int numMoves ){
-        ArrayList<String> moves = new ArrayList<>();
-        int count = 0;
-        if ( isPieceOnScreen() ){
-            for ( int i = pieceColumn - 1; i >= 0 && count < numMoves; i-- ){
-                if ( ( board.getCell(pieceRow, i ).getPieceOnSquare()
-                    == null || isEnemy( board, pieceRow, i ) ) ){
-                    moves.add( pieceRow + "," + i );
-                    count++;
-                    if ( isEnemy( board, pieceRow, i ) ){
-                        break;
-                    }
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
+    	    ChessGameBoard board,
+    	    int numMoves) {
+    	    ArrayList<String> moves = new ArrayList<>();
+    	    int count = 0;
+    	    if (isPieceOnScreen()) {
+    	        int i = pieceColumn - 1;
+    	        while (i >= 0 && count < numMoves) {
+    	            if (board.getCell(pieceRow, i).getPieceOnSquare() == null
+    	                || isEnemy(board, pieceRow, i)) {
+    	                moves.add(pieceRow + "," + i);
+    	                count++;
+    	                if (isEnemy(board, pieceRow, i)) {
+    	                    break;
+    	                }
+    	            } else {
+    	                i = -1; // terminate the loop
+    	            }
+    	            i--;
+    	        }
+    	    }
+    	    return moves;
+    	}
     // ----------------------------------------------------------
     /**
      * Calculates and returns moves in the north-west direction relative to this
