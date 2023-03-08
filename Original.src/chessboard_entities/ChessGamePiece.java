@@ -252,9 +252,6 @@ public abstract class ChessGamePiece{
                 count++;
             } else if (isEnemy(board, newRow, newCol)) {
                 moves.add(newRow + "," + newCol);
-                count++;
-                // Stop searching for moves if an enemy piece is encountered
-                break;
             }
             i++;
         }
@@ -275,7 +272,6 @@ public abstract class ChessGamePiece{
             if (isOnScreen(pieceRow - i, pieceColumn + i)) {
                 if (board.getCell(pieceRow - i, pieceColumn + i).getPieceOnSquare() == null) {
                     moves.add((pieceRow - i) + "," + (pieceColumn + i));
-                    count++;
                 } else {
                     if (isEnemy(board, pieceRow - i, pieceColumn + i)) {
                         moves.add((pieceRow - i) + "," + (pieceColumn + i));
@@ -302,8 +298,6 @@ public abstract class ChessGamePiece{
                     count++;
                 } else if (isEnemy(board, pieceRow + i, pieceColumn - i)) {
                     moves.add((pieceRow + i) + "," + (pieceColumn - i));
-                    count++;
-                    break; // Jump out of loop after finding an enemy piece
                 } else {
                     break; // Friendly piece blocking the way
                 }
@@ -328,7 +322,6 @@ public abstract class ChessGamePiece{
             if (isOnScreen(row, col)) {
                 if (board.getCell(row, col).getPieceOnSquare() == null) {
                     moves.add(row + "," + col);
-                    count++;
                 } else if (isEnemy(board, row, col)) {
                     moves.add(row + "," + col);
                     count = numMoves; // terminate the loop
