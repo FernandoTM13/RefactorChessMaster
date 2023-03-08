@@ -1,6 +1,8 @@
 package chessboard_entities;
 import java.awt.*;
 import javax.swing.*;
+
+import controllerchess.ChessGameLog;
 // -------------------------------------------------------------------------
 /**
  * The main panel of the Chess game.

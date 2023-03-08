@@ -1,4 +1,4 @@
-package chessboard_entities;
+package controllerchess;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.util.Date;
