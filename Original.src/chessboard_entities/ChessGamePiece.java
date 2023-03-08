@@ -233,32 +233,20 @@ public abstract class ChessGamePiece{
     	    return moves;
     	}
     // ----------------------------------------------------------
-    /**
-     * Calculates and returns moves in the north-west direction relative to this
-     * piece.
-     *
-     * @param board
-     *            the board to calculate the moves on
-     * @param numMoves
-     *            the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
+    
     protected ArrayList<String> calculateNorthWestMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<>();
         int count = 0;
-
         if (!isPieceOnScreen()) {
             return moves;
         }
-
-        for (int i = 1; i < 8 && count < numMoves; i++) {
+        int i = 1;
+        while (i < 8 && count < numMoves) {
             int newRow = pieceRow - i;
             int newCol = pieceColumn - i;
-
             if (!isOnScreen(newRow, newCol)) {
                 break;
             }
-
             if (board.getCell(newRow, newCol).getPieceOnSquare() == null) {
                 moves.add(newRow + "," + newCol);
                 count++;
@@ -266,23 +254,16 @@ public abstract class ChessGamePiece{
                 moves.add(newRow + "," + newCol);
                 count++;
                 // Stop searching for moves if an enemy piece is encountered
-                i = 8;
+                break;
             }
+            i++;
         }
-
         return moves;
     }
-    // ----------------------------------------------------------
-    /**
-     * Calculates and returns moves in the north-east direction relative to this
-     * piece.
-     *
-     * @param board
-     *            the board to calculate the moves on
-     * @param numMoves
-     *            the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
+    
+    
+    
+    
     protected ArrayList<String> calculateNorthEastMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<>();
         int count = 0;
@@ -306,53 +287,33 @@ public abstract class ChessGamePiece{
 
         return moves;
     }
-    // ----------------------------------------------------------
-    /**
-     * Calculates and returns moves in the south-west direction relative to this
-     * piece.
-     *
-     * @param board
-     *            the board to calculate the moves on
-     * @param numMoves
-     *            the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateSouthWestMoves(
-            ChessGameBoard board,
-            int numMoves ){
+   
+    protected ArrayList<String> calculateSouthWestMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<>();
         int count = 0;
-        if (!isPieceOnScreen()){
+        if (!isPieceOnScreen()) {
             return moves;
         }
-        for (int i = 1; i < 8 && count < numMoves; i++){
+        int i = 1;
+        while (i < 8 && count < numMoves) {
             if (isOnScreen(pieceRow + i, pieceColumn - i)) {
                 if (board.getCell(pieceRow + i, pieceColumn - i).getPieceOnSquare() == null) {
                     moves.add((pieceRow + i) + "," + (pieceColumn - i));
                     count++;
-                } else if (isEnemy(board, pieceRow + i, pieceColumn - i)){
+                } else if (isEnemy(board, pieceRow + i, pieceColumn - i)) {
                     moves.add((pieceRow + i) + "," + (pieceColumn - i));
                     count++;
-                    i = 8; // Jump out of loop after finding an enemy piece
-                }
-                else {
+                    break; // Jump out of loop after finding an enemy piece
+                } else {
                     break; // Friendly piece blocking the way
                 }
             }
+            i++;
         }
         return moves;
     }
-    // ----------------------------------------------------------
-    /**
-     * Calculates and returns moves in the south-east direction relative to this
-     * piece.
-     *
-     * @param board
-     *            the board to calculate the moves on
-     * @param numMoves
-     *            the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
+    
+    
     protected ArrayList<String> calculateSouthEastMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<>();
         int count = 0;
