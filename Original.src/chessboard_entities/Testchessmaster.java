@@ -3,16 +3,14 @@ package chessboard_entities;
 import junit.framework.TestCase;
 import controllerchess.*;
 
-public class testChessMaster extends TestCase{
+public class Testchessmaster extends TestCase{
 
 private ChessGameBoard chessgameboard;
-	
-	private ChessGameLog chessgameLog;
-	
+		
 	public void instanciaTest() {
+
 		chessgameboard = new ChessGameBoard();
 		
-		chessgameLog = new ChessGameLog();
 	}
 	
 	
